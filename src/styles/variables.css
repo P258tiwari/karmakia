@@ -1,0 +1,12 @@
+:root {
+  --kia-red: #bb162b;
+  --black: #101010;
+  --charcoal: #242424;
+  --ink-muted: #66645f;
+  --warm-white: #f7f6f2;
+  --line: rgba(16, 16, 16, .13);
+  --green: #9fbf9a;
+  --page: min(100% - 40px, 1380px);
+  --shadow: 0 24px 70px rgba(15, 15, 15, .11);
+  --radius: 4px;
+}
