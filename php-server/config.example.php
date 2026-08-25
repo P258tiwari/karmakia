@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 return [
     'allowed_origins' => [
-        'https://your-landing-page.example',
+        'https://www.karmakia.in',
+        'https://karmakia.in',
+        'https://www.karmakia.com',
+        'https://karmakia.com',
         'http://127.0.0.1:5173',
     ],
     'smtp' => [

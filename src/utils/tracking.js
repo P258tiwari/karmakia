@@ -9,8 +9,7 @@ export function getTrackingParameters() {
 }
 
 export async function submitLead(formData) {
-  const endpoint = import.meta.env.VITE_LEAD_API_URL;
-  if (!endpoint) return { ok: false, error: 'Enquiry email service is not configured yet.' };
+  const endpoint = import.meta.env.VITE_LEAD_API_URL || '/api/enquiry.php';
 
   const payload = {
     ...formData,
