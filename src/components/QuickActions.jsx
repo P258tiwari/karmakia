@@ -2,9 +2,9 @@ import { ArrowUpRight, CalendarCheck, CarFront, MapPin, Wrench } from 'lucide-re
 
 export default function QuickActions({ onLead }) {
   const actions = [
-    [CalendarCheck, 'Book Test Drive', 'Choose your Kia and a convenient time', () => onLead('Book Test Drive')],
-    [CarFront, 'Model Enquiry', 'Ask about the Kia that suits you', () => onLead('Model Enquiry')],
-    [Wrench, 'Book Service', 'Expert care from Kia trained teams', () => document.querySelector('#services')?.scrollIntoView({ behavior: 'smooth' })],
+    [CalendarCheck, 'Book Test Drive', 'Choose your KIA and a convenient time', () => onLead('Book Test Drive')],
+    [CarFront, 'Model Enquiry', 'Ask about the KIA that suits you', () => onLead('Model Enquiry')],
+    [Wrench, 'Book Service', 'Expert care from KIA trained teams', () => document.querySelector('#services')?.scrollIntoView({ behavior: 'smooth' })],
     [MapPin, 'Find a Showroom', 'Etah, Hathras or Kasganj', () => document.querySelector('#locations')?.scrollIntoView({ behavior: 'smooth' })],
   ];
   return (

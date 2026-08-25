@@ -5,17 +5,75 @@ import { locations } from '../data/locations';
 import { submitLead } from '../utils/tracking';
 
 const enquiryTypes = ['Book Test Drive', 'Model Enquiry', 'Sales Enquiry', 'Service Enquiry', 'Finance', 'Exchange', 'EV Enquiry'];
-const initialForm = { name: '', mobile: '', email: '', model: '', location: '', enquiryType: 'Book Test Drive', preferredDate: '', message: '', consent: false };
+const initialForm = { name: '', mobile: '', email: '', model: '', location: '', enquiryType: 'Book Test Drive', preferredDate: '', message: '', consent: false, website: '' };
 
 export default function LeadForm({ request }) {
-  const [form, setForm] = useState(initialForm); const [errors, setErrors] = useState({}); const [status, setStatus] = useState('idle');
-  useEffect(() => { if (request) setForm((current) => ({ ...current, enquiryType: request.enquiryType || current.enquiryType, model: request.model || current.model, location: request.location || current.location })); }, [request]);
-  const change = ({ target }) => { const value = target.type === 'checkbox' ? target.checked : target.value; setForm((current) => ({ ...current, [target.name]: value })); setErrors((current) => ({ ...current, [target.name]: '' })); };
-  const validate = () => { const next = {}; if (!form.name.trim()) next.name = 'Please enter your name.'; if (!/^[6-9]\d{9}$/.test(form.mobile)) next.mobile = 'Enter a valid 10-digit Indian mobile number.'; if (form.email && !/^\S+@\S+\.\S+$/.test(form.email)) next.email = 'Enter a valid email address.'; if (!form.consent) next.consent = 'Consent is required to submit your enquiry.'; return next; };
-  const submit = async (event) => { event.preventDefault(); const next = validate(); setErrors(next); if (Object.keys(next).length) return; setStatus('submitting'); const result = await submitLead(form); setStatus(result.ok ? 'success' : 'error'); };
+  const [form, setForm] = useState(initialForm);
+  const [errors, setErrors] = useState({});
+  const [status, setStatus] = useState('idle');
+
+  useEffect(() => {
+    if (request) setForm((current) => ({ ...current, enquiryType: request.enquiryType || current.enquiryType, model: request.model || current.model, location: request.location || current.location }));
+  }, [request]);
+
+  const change = ({ target }) => {
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    setForm((current) => ({ ...current, [target.name]: value }));
+    setErrors((current) => ({ ...current, [target.name]: '' }));
+  };
+
+  const validate = () => {
+    const next = {};
+    if (!form.name.trim()) next.name = 'Please enter your name.';
+    if (!/^[6-9]\d{9}$/.test(form.mobile)) next.mobile = 'Enter a valid 10-digit Indian mobile number.';
+    if (form.email && !/^\S+@\S+\.\S+$/.test(form.email)) next.email = 'Enter a valid email address.';
+    if (!form.consent) next.consent = 'Consent is required to submit your enquiry.';
+    return next;
+  };
+
+  const submit = async (event) => {
+    event.preventDefault();
+    const next = validate();
+    setErrors(next);
+    if (Object.keys(next).length) return;
+    setStatus('submitting');
+    const result = await submitLead(form);
+    if (!result.ok) {
+      setErrors((current) => ({ ...current, submit: result.error }));
+      setStatus('error');
+      return;
+    }
+    setStatus('success');
+  };
+
   if (status === 'success') return <section className="lead-section" id="contact"><div className="lead-success"><span><Check /></span><p>ENQUIRY RECEIVED</p><h2>Thank you.<br />We&apos;ll be in touch.</h2><p>Your enquiry has been received. The Karma KIA team will connect with you.</p><button className="button button-light" onClick={() => { setStatus('idle'); setForm(initialForm); }}>Send another enquiry</button></div></section>;
+
   return (
-    <section className="lead-section" id="contact"><div className="lead-shell"><div className="lead-copy"><span className="section-eyebrow">Your next journey starts here</span><h2>Book your<br />Kia experience.</h2><p>Tell us what you&apos;re looking for and the Karma KIA team will connect with you.</p><div className="lead-points"><span><Check />No obligation enquiry</span><span><Check />Choose your preferred location</span><span><Check />Latest model and offer information</span></div></div><form className="lead-form" onSubmit={submit} noValidate><div className="field"><label htmlFor="name">Name *</label><input id="name" name="name" value={form.name} onChange={change} placeholder="Your full name" aria-invalid={Boolean(errors.name)} />{errors.name && <small>{errors.name}</small>}</div><div className="field"><label htmlFor="mobile">Mobile Number *</label><input id="mobile" name="mobile" type="tel" inputMode="numeric" maxLength="10" value={form.mobile} onChange={change} placeholder="10-digit mobile number" aria-invalid={Boolean(errors.mobile)} />{errors.mobile && <small>{errors.mobile}</small>}</div><div className="field"><label htmlFor="email">Email <span>Optional</span></label><input id="email" name="email" type="email" value={form.email} onChange={change} placeholder="you@example.com" aria-invalid={Boolean(errors.email)} />{errors.email && <small>{errors.email}</small>}</div><div className="field"><label htmlFor="model">Interested Model</label><select id="model" name="model" value={form.model} onChange={change}><option value="">Select a Kia</option>{vehicles.map((vehicle) => <option key={vehicle.id} value={vehicle.name}>{vehicle.name}</option>)}</select></div><div className="field"><label htmlFor="location">Preferred Location</label><select id="location" name="location" value={form.location} onChange={change}><option value="">Choose a location</option>{locations.map((location) => <option key={location.id}>{location.city}</option>)}</select></div><div className="field"><label htmlFor="enquiryType">Enquiry Type</label><select id="enquiryType" name="enquiryType" value={form.enquiryType} onChange={change}>{enquiryTypes.map((type) => <option key={type}>{type}</option>)}</select></div><div className="field"><label htmlFor="preferredDate">Preferred Date <span>Optional</span></label><input id="preferredDate" name="preferredDate" type="date" min={new Date().toISOString().split('T')[0]} value={form.preferredDate} onChange={change} /></div><div className="field field-wide"><label htmlFor="message">Message <span>Optional</span></label><textarea id="message" name="message" rows="3" value={form.message} onChange={change} placeholder="Anything you'd like us to know?" /></div><label className="consent field-wide"><input type="checkbox" name="consent" checked={form.consent} onChange={change} /><span>I agree to be contacted by Karma KIA regarding my enquiry.</span></label>{errors.consent && <small className="form-error field-wide">{errors.consent}</small>}<button id="cta_form_submit" className="button button-red submit-button field-wide" type="submit" disabled={status === 'submitting'}>{status === 'submitting' ? <><LoaderCircle className="spin" />Submitting…</> : <>Submit Enquiry <Send size={17} /></>}</button><p className="form-note field-wide">Your information is used only to respond to this enquiry.</p></form></div>
+    <section className="lead-section" id="contact">
+      <div className="lead-shell">
+        <div className="lead-copy">
+          <span className="section-eyebrow">Your next journey starts here</span>
+          <h2><span>Book your</span><span>KIA experience.</span></h2>
+          <p>Tell us what you&apos;re looking for and the Karma KIA team will connect with you.</p>
+          <div className="lead-points"><span><Check />No obligation enquiry</span><span><Check />Choose your preferred location</span><span><Check />Latest model and offer information</span></div>
+        </div>
+        <form className="lead-form" onSubmit={submit} noValidate>
+          <div className="honeypot" aria-hidden="true"><label htmlFor="website">Website</label><input id="website" name="website" value={form.website} onChange={change} tabIndex={-1} autoComplete="off" /></div>
+          <div className="field"><label htmlFor="name">Name *</label><input id="name" name="name" value={form.name} onChange={change} placeholder="Your full name" aria-invalid={Boolean(errors.name)} />{errors.name && <small>{errors.name}</small>}</div>
+          <div className="field"><label htmlFor="mobile">Mobile Number *</label><input id="mobile" name="mobile" type="tel" inputMode="numeric" maxLength="10" value={form.mobile} onChange={change} placeholder="10-digit mobile number" aria-invalid={Boolean(errors.mobile)} />{errors.mobile && <small>{errors.mobile}</small>}</div>
+          <div className="field"><label htmlFor="email">Email <span>Optional</span></label><input id="email" name="email" type="email" value={form.email} onChange={change} placeholder="you@example.com" aria-invalid={Boolean(errors.email)} />{errors.email && <small>{errors.email}</small>}</div>
+          <div className="field"><label htmlFor="model">Interested Model</label><select id="model" name="model" value={form.model} onChange={change}><option value="">Select a KIA</option>{vehicles.map((vehicle) => <option key={vehicle.id} value={vehicle.name}>{vehicle.name}</option>)}</select></div>
+          <div className="field"><label htmlFor="location">Preferred Location</label><select id="location" name="location" value={form.location} onChange={change}><option value="">Choose a location</option>{locations.map((location) => <option key={location.id}>{location.city}</option>)}</select></div>
+          <div className="field"><label htmlFor="enquiryType">Enquiry Type</label><select id="enquiryType" name="enquiryType" value={form.enquiryType} onChange={change}>{enquiryTypes.map((type) => <option key={type}>{type}</option>)}</select></div>
+          <div className="field"><label htmlFor="preferredDate">Preferred Date <span>Optional</span></label><input id="preferredDate" name="preferredDate" type="date" min={new Date().toISOString().split('T')[0]} value={form.preferredDate} onChange={change} /></div>
+          <div className="field field-wide"><label htmlFor="message">Message <span>Optional</span></label><textarea id="message" name="message" rows="3" value={form.message} onChange={change} placeholder="Anything you'd like us to know?" /></div>
+          <label className="consent field-wide"><input type="checkbox" name="consent" checked={form.consent} onChange={change} /><span>I agree to be contacted by Karma KIA regarding my enquiry.</span></label>
+          {errors.consent && <small className="form-error field-wide">{errors.consent}</small>}
+          {errors.submit && <p className="form-submit-error field-wide" role="alert">{errors.submit}</p>}
+          <button id="cta_form_submit" className="button button-red submit-button field-wide" type="submit" disabled={status === 'submitting'}>{status === 'submitting' ? <><LoaderCircle className="spin" />Submitting…</> : <>Submit Enquiry <Send size={17} /></>}</button>
+          <p className="form-note field-wide">Your information is used only to respond to this enquiry.</p>
+        </form>
+      </div>
     </section>
   );
 }

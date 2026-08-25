@@ -3,7 +3,7 @@ import { site } from '../config/site';
 import SectionHeading from './SectionHeading';
 
 const instagramCards = [
-  { image: '/assets/cars/seltos-2026.png', label: 'New Kia arrivals', className: 'is-cutout' },
+  { image: '/assets/cars/seltos-2026.png', label: 'New KIA arrivals', className: 'is-cutout' },
   { image: '/assets/cars/carens-clavis.png', label: 'Family journeys' },
   { image: '/assets/cars/ev6.png', label: 'Electric inspiration' },
 ];
@@ -13,7 +13,7 @@ export default function Gallery() {
     <section className="section instagram-section" id="instagram">
       <div className="section-shell">
         <div className="instagram-heading">
-          <SectionHeading eyebrow="Follow Karma KIA" title="See what’s happening on Instagram." copy="New arrivals, customer moments and updates from Karma KIA." />
+          <SectionHeading eyebrow="Follow Karma KIA" title={<><span>See what&apos;s happening</span><span>on Instagram.</span></>} copy="New arrivals, customer moments and updates from Karma KIA." />
           <a className="button button-dark" href={site.social.instagram} target="_blank" rel="noreferrer"><Instagram size={18} />@karmakiaofficial <ArrowUpRight size={17} /></a>
         </div>
         <div className="instagram-grid">

@@ -5,7 +5,7 @@ export const site = {
   phone: '+917900790791',
   whatsapp: '917900790791',
   dealerCode: 'UP322',
-  email: 'kiacare@kiaindia.net',
+  email: 'info@Karmakia.in',
   kiaWebsite: 'https://www.kia.com/in/',
   copyright: '© 2026 Karma KIA. All rights reserved.',
   social: {
@@ -13,8 +13,8 @@ export const site = {
     facebook: 'https://www.facebook.com/karmakiaofficial',
   },
   statistics: [
-    { value: '15 Lakh+', label: 'Kia cars on Indian roads' },
-    { value: '655', label: 'Kia touchpoints' },
+    { value: '15 Lakh+', label: 'KIA cars on Indian roads' },
+    { value: '655', label: 'KIA touchpoints' },
     { value: '3-Year', label: 'Unlimited-km standard warranty*' },
     { value: '24×7', label: 'Roadside assistance*' },
   ],

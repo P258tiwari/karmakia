@@ -6,6 +6,6 @@ import SectionHeading from './SectionHeading';
 export default function Locations({ onLead }) {
   const [selected, setSelected] = useState('etah');
   return (
-    <section className="section locations-section" id="locations"><div className="section-shell"><div className="locations-heading"><SectionHeading eyebrow="Karma KIA near you" title={<>Three locations.<br />One Karma KIA experience.</>} copy="Discover the latest Kia range and attentive dealership support, closer to home." /></div><LocationTabs locations={locations} selected={selected} onSelect={setSelected} onLead={onLead} /></div></section>
+    <section className="section locations-section" id="locations"><div className="section-shell"><div className="locations-heading"><SectionHeading eyebrow="Karma KIA near you" title={<><span>Three locations.</span><span>One Karma KIA experience.</span></>} copy="Discover the latest KIA range and attentive dealership support, closer to home." /></div><LocationTabs locations={locations} selected={selected} onSelect={setSelected} onLead={onLead} /></div></section>
   );
 }

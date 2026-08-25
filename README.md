@@ -44,10 +44,10 @@ Branch information and map/direction URLs live only in `src/data/locations.js`.
 
 ## Connecting the lead form
 
-`src/utils/tracking.js` contains the `submitLead()` integration boundary. Replace its development console logging with an API, CRM, Google Sheet, webhook or WhatsApp Business request. The payload already preserves UTM values, `gclid` and `fbclid` from the page URL. Add server-side validation, spam controls and consent storage when connecting a live endpoint.
+The React form posts enquiries to the HTTPS endpoint configured by `VITE_LEAD_API_URL`. A production-ready PHP/PHPMailer SMTP relay, branded HTML email template, validation and spam controls are included in `php-server/`. Follow `php-server/README.md` to install it on PHP hosting and keep SMTP credentials outside the public web root.
 
 ## Notes
 
-- The enquiry form is frontend-only and shows a complete validated success state.
+- The enquiry form shows success only after the configured PHP mail endpoint confirms delivery.
 - Phone and WhatsApp actions are live links using the configured dealership number.
 - Pricing, offers, model specifications, maps, legal URLs and social URLs should be reviewed before public launch.

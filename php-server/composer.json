@@ -1,0 +1,13 @@
+{
+  "name": "karma-kia/enquiry-mailer",
+  "description": "Secure SMTP relay for Karma KIA landing-page enquiries",
+  "type": "project",
+  "require": {
+    "php": ">=8.1",
+    "phpmailer/phpmailer": "^6.9"
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "sort-packages": true
+  }
+}
