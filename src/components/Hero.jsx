@@ -18,7 +18,6 @@ export default function Hero({ onLead }) {
       <div className="hero-visual reveal">
         <VehicleVisual vehicle={seltos} priority className="hero-car" />
         <div className="model-callout"><span>THE ALL-NEW</span><strong>KIA Seltos</strong><small>Badass. Forever.</small></div>
-        <div className="model-index">01 <span>/ 10</span></div>
       </div>
       <a href="#locations" className="hero-locations"><MapPin size={16} /> Etah <span>/</span> Hathras <span>/</span> Kasganj</a>
     </section>
