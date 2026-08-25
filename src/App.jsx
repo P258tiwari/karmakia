@@ -20,10 +20,6 @@ import WhyKarmaKia from './components/WhyKarmaKia';
 
 export default function App() {
   const legalPage = window.location.pathname.replace(/\/+$/, '') || '/';
-  if (legalPage === '/privacy' || legalPage === '/terms') {
-    return <LegalPage type={legalPage === '/privacy' ? 'privacy' : 'terms'} />;
-  }
-
   const [selectedVehicle, setSelectedVehicle] = useState(null);
   const [leadRequest, setLeadRequest] = useState(null);
 
@@ -33,10 +29,15 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    if (legalPage === '/privacy' || legalPage === '/terms') return undefined;
     const reveal = new IntersectionObserver((entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add('is-visible')), { threshold: 0.08 });
     document.querySelectorAll('.section, .trust-strip, .lead-section').forEach((node) => reveal.observe(node));
     return () => reveal.disconnect();
-  }, []);
+  }, [legalPage]);
+
+  if (legalPage === '/privacy' || legalPage === '/terms') {
+    return <LegalPage type={legalPage === '/privacy' ? 'privacy' : 'terms'} />;
+  }
 
   return (
     <main id="home">

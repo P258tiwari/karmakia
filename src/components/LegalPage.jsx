@@ -1,4 +1,5 @@
 import { ArrowLeft, Mail, Phone } from 'lucide-react';
+import { useEffect } from 'react';
 import { site } from '../config/site';
 import Footer from './Footer';
 import Logo from './Logo';
@@ -25,6 +26,16 @@ export default function LegalPage({ type }) {
   const isPrivacy = type === 'privacy';
   const title = isPrivacy ? 'Privacy Policy' : 'Terms of Service';
   const sections = isPrivacy ? privacySections : termsSections;
+  const description = isPrivacy
+    ? 'Read how Karma KIA handles information submitted through its dealership website and enquiry forms.'
+    : 'Read the terms that apply when using the Karma KIA dealership website.';
+
+  useEffect(() => {
+    document.title = `${title} | Karma KIA`;
+    document.querySelector('meta[name="description"]')?.setAttribute('content', description);
+    document.querySelector('link[rel="canonical"]')?.setAttribute('href', `https://www.karmakia.in/${type}`);
+  }, [description, title, type]);
+
   return (
     <main className="legal-page">
       <header className="legal-nav"><a className="brand" href="/" aria-label="Karma KIA home"><Logo /></a><a href="/"><ArrowLeft size={17} />Back to website</a></header>
