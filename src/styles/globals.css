@@ -342,10 +342,11 @@ body.modal-open, body.menu-open { overflow: hidden; }
   text-transform:uppercase;
 }
 .hero-showroom figcaption strong{
-  max-width:260px;
+  max-width:none;
   font-size:18px;
   line-height:1.35;
   text-align:right;
+  white-space:nowrap;
 }
 .hero-locations{bottom:34px;color:#625f5a}
 .hero-locations span{color:rgba(16,16,16,.22)}
