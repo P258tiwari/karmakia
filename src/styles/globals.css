@@ -220,6 +220,32 @@ body.modal-open, body.menu-open { overflow: hidden; }
 .brand-lockup{min-height:44px}
 .location-phone{min-height:44px;display:inline-flex;align-items:center}
 
+/* Consistent Karma KIA emphasis */
+.brand-highlight{
+  display:inline;
+  padding:0 .06em;
+  color:var(--kia-red);
+  background:linear-gradient(transparent 70%,rgba(187,22,43,.16) 0);
+  font:inherit;
+  font-weight:800;
+  white-space:nowrap;
+  box-decoration-break:clone;
+  -webkit-box-decoration-break:clone;
+}
+.section-heading.is-light .brand-highlight,
+.lead-section .brand-highlight{
+  color:#fff;
+  background:linear-gradient(transparent 70%,rgba(255,255,255,.25) 0);
+}
+.hero-showroom figcaption .brand-highlight{
+  color:#fff;
+  background:linear-gradient(transparent 68%,var(--kia-red) 0);
+}
+.footer .brand-highlight{
+  color:#fff;
+  background:linear-gradient(transparent 70%,rgba(187,22,43,.75) 0);
+}
+
 /* White showroom hero */
 .site-header{
   height:88px;

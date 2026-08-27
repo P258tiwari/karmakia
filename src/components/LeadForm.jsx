@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { vehicles } from '../data/vehicles';
 import { locations } from '../data/locations';
 import { submitLead } from '../utils/tracking';
+import BrandText from './BrandText';
 
 const enquiryTypes = ['Book Test Drive', 'Model Enquiry', 'Sales Enquiry', 'Service Enquiry', 'Finance', 'Exchange', 'EV Enquiry'];
 const initialForm = { name: '', mobile: '', email: '', model: '', location: '', enquiryType: 'Book Test Drive', preferredDate: '', message: '', consent: false, website: '' };
@@ -46,7 +47,7 @@ export default function LeadForm({ request }) {
     setStatus('success');
   };
 
-  if (status === 'success') return <section className="lead-section" id="contact"><div className="lead-success"><span><Check /></span><p>ENQUIRY RECEIVED</p><h2>Thank you.<br />We&apos;ll be in touch.</h2><p>Your enquiry has been received. The Karma KIA team will connect with you.</p><button className="button button-light" onClick={() => { setStatus('idle'); setForm(initialForm); }}>Send another enquiry</button></div></section>;
+  if (status === 'success') return <section className="lead-section" id="contact"><div className="lead-success"><span><Check /></span><p>ENQUIRY RECEIVED</p><h2>Thank you.<br />We&apos;ll be in touch.</h2><p><BrandText>Your enquiry has been received. The Karma KIA team will connect with you.</BrandText></p><button className="button button-light" onClick={() => { setStatus('idle'); setForm(initialForm); }}>Send another enquiry</button></div></section>;
 
   return (
     <section className="lead-section" id="contact">
@@ -54,7 +55,7 @@ export default function LeadForm({ request }) {
         <div className="lead-copy">
           <span className="section-eyebrow">Your next journey starts here</span>
           <h2><span>Book your</span><span>KIA experience.</span></h2>
-          <p>Tell us what you&apos;re looking for and the Karma KIA team will connect with you.</p>
+          <p><BrandText>Tell us what you&apos;re looking for and the Karma KIA team will connect with you.</BrandText></p>
           <div className="lead-points"><span><Check />No obligation enquiry</span><span><Check />Choose your preferred location</span><span><Check />Latest model and offer information</span></div>
         </div>
         <form className="lead-form" onSubmit={submit} noValidate>
@@ -67,7 +68,7 @@ export default function LeadForm({ request }) {
           <div className="field"><label htmlFor="enquiryType">Enquiry Type</label><select id="enquiryType" name="enquiryType" value={form.enquiryType} onChange={change}>{enquiryTypes.map((type) => <option key={type}>{type}</option>)}</select></div>
           <div className="field"><label htmlFor="preferredDate">Preferred Date <span>Optional</span></label><input id="preferredDate" name="preferredDate" type="date" min={new Date().toISOString().split('T')[0]} value={form.preferredDate} onChange={change} /></div>
           <div className="field field-wide"><label htmlFor="message">Message <span>Optional</span></label><textarea id="message" name="message" rows="3" value={form.message} onChange={change} placeholder="Anything you'd like us to know?" /></div>
-          <label className="consent field-wide"><input type="checkbox" name="consent" checked={form.consent} onChange={change} /><span>I agree to be contacted by Karma KIA regarding my enquiry.</span></label>
+          <label className="consent field-wide"><input type="checkbox" name="consent" checked={form.consent} onChange={change} /><span><BrandText>I agree to be contacted by Karma KIA regarding my enquiry.</BrandText></span></label>
           {errors.consent && <small className="form-error field-wide">{errors.consent}</small>}
           {errors.submit && <p className="form-submit-error field-wide" role="alert">{errors.submit}</p>}
           <button id="cta_form_submit" className="button button-red submit-button field-wide" type="submit" disabled={status === 'submitting'}>{status === 'submitting' ? <><LoaderCircle className="spin" />Submitting…</> : <>Submit Enquiry <Send size={17} /></>}</button>

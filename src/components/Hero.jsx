@@ -1,10 +1,11 @@
 import { ArrowDown, ArrowUpRight, MapPin } from 'lucide-react';
+import BrandText from './BrandText';
 
 export default function Hero({ onLead }) {
   return (
     <section className="hero" aria-labelledby="hero-title">
       <div className="hero-copy reveal">
-        <div className="eyebrow"><span /> KARMA KIA &middot; AUTHORISED DEALERSHIP</div>
+        <div className="eyebrow"><span /><BrandText>Karma KIA</BrandText> &middot; AUTHORISED DEALERSHIP</div>
         <h1 id="hero-title">Your KIA.<br /><em>Now closer</em> to you.</h1>
         <p className="hero-lede">Experience the latest KIA cars and EVs across Etah, Hathras &amp; Kasganj.</p>
         <div className="hero-buttons">
@@ -15,10 +16,10 @@ export default function Hero({ onLead }) {
       </div>
       <div className="hero-visual reveal">
         <figure className="hero-showroom">
-          <img src="/assets/showroom/karma-kia-showroom-hero-v2.png" alt="Complete exterior view of the Karma Kia showroom" width="1448" height="1086" fetchPriority="high" />
+          <img src="/assets/showroom/karma-kia-showroom-hero-v2.png" alt="Complete exterior view of the Karma KIA showroom" width="1448" height="1086" fetchPriority="high" />
           <figcaption>
-            <span>Karma Kia Showroom</span>
-            <strong>Everything Kia, under one roof.</strong>
+            <span><BrandText>Karma KIA</BrandText> Showroom</span>
+            <strong>Everything KIA, under one roof.</strong>
           </figcaption>
         </figure>
       </div>

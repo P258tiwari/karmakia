@@ -2,6 +2,7 @@ import { CalendarCheck, Check, Phone, X } from 'lucide-react';
 import { useEffect, useRef } from 'react';
 import { site } from '../config/site';
 import { whatsappUrl } from '../utils/whatsapp';
+import BrandText from './BrandText';
 import VehicleVisual from './VehicleVisual';
 
 export default function VehicleModal({ vehicle, onClose, onLead }) {
@@ -27,7 +28,7 @@ export default function VehicleModal({ vehicle, onClose, onLead }) {
             <div><small>Powertrain</small><strong>{vehicle.fuelTypes.join(' / ')}</strong></div><div><small>Transmission</small><strong>{vehicle.transmission}</strong></div><div><small>Seating</small><strong>{vehicle.seating}</strong></div>{vehicle.range && <div><small>Range</small><strong>{vehicle.range}</strong></div>}{vehicle.battery && <div><small>Battery</small><strong>{vehicle.battery}</strong></div>}
           </div>
           <h3>What stands out</h3><ul className="feature-list">{vehicle.keyFeatures.map((feature) => <li key={feature}><Check size={16} />{feature}</li>)}</ul>
-          <div className="modal-actions"><button className="button button-red" onClick={() => { onClose(); onLead('Book Test Drive', vehicle.name); }}><CalendarCheck size={17} />Book Test Drive</button><button id="cta_vehicle_enquiry" className="button button-outline" onClick={() => { onClose(); onLead('Model Enquiry', vehicle.name); }}>Enquire About This KIA</button><a className="button button-plain" href={`tel:${site.phone}`}><Phone size={17} />Call Karma KIA</a></div>
+          <div className="modal-actions"><button className="button button-red" onClick={() => { onClose(); onLead('Book Test Drive', vehicle.name); }}><CalendarCheck size={17} />Book Test Drive</button><button id="cta_vehicle_enquiry" className="button button-outline" onClick={() => { onClose(); onLead('Model Enquiry', vehicle.name); }}>Enquire About This KIA</button><a className="button button-plain" href={`tel:${site.phone}`}><Phone size={17} /><span><BrandText>Call Karma KIA</BrandText></span></a></div>
           <a className="modal-whatsapp" href={whatsappUrl(`Hi Karma KIA, I would like to know more about the ${vehicle.name}.`)} target="_blank" rel="noreferrer">Chat about this model on WhatsApp</a>
         </div>
       </section>

@@ -1,5 +1,6 @@
 import { Facebook, Instagram, Mail, Phone } from 'lucide-react';
 import { site } from '../config/site';
+import BrandText from './BrandText';
 import Logo from './Logo';
 
 export default function Footer() {
@@ -19,7 +20,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="footer-compact-bottom">
-        <span>{site.copyright}</span>
+        <span><BrandText>{site.copyright}</BrandText></span>
         <nav aria-label="Legal"><a href="/privacy">Privacy Policy</a><a href="/terms">Terms of Service</a></nav>
       </div>
     </footer>
