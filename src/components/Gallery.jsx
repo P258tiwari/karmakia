@@ -1,14 +1,19 @@
+import { useEffect } from 'react';
 import { ArrowUpRight, Instagram } from 'lucide-react';
 import { site } from '../config/site';
 import SectionHeading from './SectionHeading';
 
-const instagramCards = [
-  { image: '/assets/cars/seltos-2026.png', label: 'New KIA arrivals', className: 'is-cutout' },
-  { image: '/assets/cars/carens-clavis.png', label: 'Family journeys' },
-  { image: '/assets/cars/ev6.png', label: 'Electric inspiration' },
-];
-
 export default function Gallery() {
+  useEffect(() => {
+    if (document.querySelector('script[data-elfsight-platform]')) return;
+
+    const script = document.createElement('script');
+    script.src = 'https://elfsightcdn.com/platform.js';
+    script.async = true;
+    script.dataset.elfsightPlatform = 'true';
+    document.body.appendChild(script);
+  }, []);
+
   return (
     <section className="section instagram-section" id="instagram">
       <div className="section-shell">
@@ -16,15 +21,9 @@ export default function Gallery() {
           <SectionHeading eyebrow="Follow Karma KIA" title={<><span>See what&apos;s happening</span><span>on Instagram.</span></>} copy="New arrivals, customer moments and updates from Karma KIA." />
           <a className="button button-dark" href={site.social.instagram} target="_blank" rel="noreferrer"><Instagram size={18} />@karmakiaofficial <ArrowUpRight size={17} /></a>
         </div>
-        <div className="instagram-grid">
-          {instagramCards.map((card) => (
-            <a className={`instagram-card ${card.className || ''}`} href={site.social.instagram} target="_blank" rel="noreferrer" key={card.label}>
-              <img src={card.image} alt="" loading="lazy" />
-              <span><Instagram size={18} />{card.label}<ArrowUpRight size={17} /></span>
-            </a>
-          ))}
+        <div className="instagram-widget-shell">
+          <div className="elfsight-app-7439144b-66cd-4204-b9c2-2a0304550642" data-elfsight-app-lazy="" />
         </div>
-        <p className="instagram-note">Visit Instagram to view the latest posts from Karma KIA.</p>
       </div>
     </section>
   );
