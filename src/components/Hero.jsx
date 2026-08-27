@@ -15,7 +15,7 @@ export default function Hero({ onLead }) {
       </div>
       <div className="hero-visual reveal">
         <figure className="hero-showroom">
-          <img src="/assets/showroom/karma-kia-showroom-hero.png" alt="Karma Kia showroom" width="1870" height="841" fetchPriority="high" />
+          <img src="/assets/showroom/karma-kia-showroom-hero-v2.png" alt="Complete exterior view of the Karma Kia showroom" width="1448" height="1086" fetchPriority="high" />
           <figcaption>
             <span>Karma Kia Showroom</span>
             <strong>Everything Kia, under one roof.</strong>

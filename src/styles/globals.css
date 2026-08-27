@@ -283,7 +283,9 @@ body.modal-open, body.menu-open { overflow: hidden; }
 .hero-trust{color:#7b7872}
 .hero-visual{
   align-self:center;
-  height:clamp(470px,65vh,650px);
+  width:100%;
+  height:auto;
+  aspect-ratio:4/3;
 }
 .hero-visual::before{
   content:'';
@@ -350,8 +352,7 @@ body.modal-open, body.menu-open { overflow: hidden; }
 
 @media (max-width:1100px){
   .hero{grid-template-columns:45% 55%;gap:30px}
-  .hero-visual{height:clamp(440px,59vh,570px)}
-  .hero-showroom img{object-position:56% center}
+  .hero-showroom img{object-position:center}
   .hero-showroom figcaption{padding:26px}
   .hero-showroom figcaption strong{display:none}
 }
@@ -372,9 +373,9 @@ body.modal-open, body.menu-open { overflow: hidden; }
   .hero-copy{padding:0}
   .hero h1{margin:24px 0 19px;font-size:clamp(48px,14vw,68px)}
   .hero-lede{max-width:390px}
-  .hero-visual{width:100%;height:clamp(285px,61vw,420px);margin:0}
+  .hero-visual{width:100%;height:auto;aspect-ratio:4/3;margin:0}
   .hero-visual::before{top:-10px;right:-10px}
-  .hero-showroom img{object-position:58% center}
+  .hero-showroom img{object-position:center}
   .hero-showroom figcaption{padding:22px}
   .hero-locations{
     position:relative;
@@ -393,6 +394,5 @@ body.modal-open, body.menu-open { overflow: hidden; }
   .hero-buttons{display:grid;grid-template-columns:1fr}
   .hero-buttons .button{width:100%}
   .hero-trust{gap:8px;font-size:9px}
-  .hero-visual{height:270px}
   .hero-showroom figcaption{padding:18px}
 }
