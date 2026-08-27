@@ -15,7 +15,7 @@ export default function StructuredData() {
         legalName: site.company,
         url: `${baseUrl}/`,
         logo: `${baseUrl}/assets/logos/karma-kia-logo.png`,
-        image: `${baseUrl}/og.png`,
+        image: `${baseUrl}/og-showroom.png`,
         email: site.email,
         telephone: site.phone,
         sameAs: [site.social.facebook, site.social.instagram],
@@ -43,7 +43,7 @@ export default function StructuredData() {
           '@id': `${baseUrl}/#${location.id}`,
           name: location.branchName,
           url: `${baseUrl}/#locations`,
-          image: `${baseUrl}/og.png`,
+          image: `${baseUrl}/og-showroom.png`,
           parentOrganization: { '@id': organizationId },
           address: {
             '@type': 'PostalAddress',
